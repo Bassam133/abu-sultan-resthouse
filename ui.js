@@ -3,17 +3,16 @@
    ========================================================================== */
 
 const NAV = [
-  { id: 'dashboard',   ar: 'لوحة التحكم',        ico: '📊', desktop: true,  mobile: true },
-  { id: 'bookings',    ar: 'الحجوزات والإيجارات', ico: '🏠', desktop: true,  mobile: true },
-  { id: 'income',      ar: 'الإيرادات والتحصيل',   ico: '💰', desktop: true,  mobile: false },
-  { id: 'expenses',    ar: 'المصاريف والمشتريات', ico: '🧾', desktop: true,  mobile: true },
-  { id: 'members',     ar: 'حسابات الأعضاء',      ico: '👥', desktop: true,  mobile: true },
-  { id: 'payroll',     ar: 'رواتب العمال',        ico: '🧑‍🔧', desktop: true, mobile: false },
-  { id: 'maintenance', ar: 'الصيانة والأصول',     ico: '🔧', desktop: true,  mobile: false },
-  { id: 'reports',     ar: 'التقارير المالية',     ico: '📈', desktop: true,  mobile: false },
-  { id: 'audit',       ar: 'سجل التعديلات',       ico: '🕘', desktop: true,  mobile: false },
-  { id: 'settings',    ar: 'الإعدادات',          ico: '⚙️', desktop: true,  mobile: false },
-  { id: 'more',        ar: 'المزيد',             ico: '⋯',  desktop: false, mobile: true },
+  { id: 'dashboard',   ar: 'لوحة التحكم',        ico: 'dashboard',   desktop: true,  mobile: true },
+  { id: 'bookings',    ar: 'الحجوزات والإيجارات', ico: 'bookings',    desktop: true,  mobile: true },
+  { id: 'expenses',    ar: 'المصاريف والمشتريات', ico: 'expenses',    desktop: true,  mobile: true },
+  { id: 'members',     ar: 'حسابات الأعضاء',      ico: 'members',     desktop: true,  mobile: true },
+  { id: 'payroll',     ar: 'رواتب العمال',        ico: 'payroll',     desktop: true,  mobile: false },
+  { id: 'maintenance', ar: 'الصيانة والأصول',     ico: 'maintenance', desktop: true,  mobile: false },
+  { id: 'reports',     ar: 'التقارير المالية',     ico: 'reports',     desktop: true,  mobile: false },
+  { id: 'audit',       ar: 'سجل التعديلات',       ico: 'audit',       desktop: true,  mobile: false },
+  { id: 'settings',    ar: 'الإعدادات',          ico: 'settings',    desktop: true,  mobile: false },
+  { id: 'more',        ar: 'المزيد',             ico: 'more',        desktop: false, mobile: true },
 ];
 const MOBILE_ONLY = ['more'];
 let route = 'dashboard';
@@ -131,11 +130,9 @@ function boot() {
   load();
   const sidebar = $('.nav-list');
   sidebar.innerHTML = NAV.filter(n => n.desktop && !MOBILE_ONLY.includes(n.id)).map(n =>
-    `<li><button data-route="${n.id}"><span class="ico">${n.ico}</span>${esc(n.ar)}</button></li>`).join('')
-    + '<li class="nav-sep"></li>'
-    + `<li><button data-route="more" style="display:none"></button></li>`;
+    `<li><button data-route="${n.id}">${iconTile(n.ico)}<span>${esc(n.ar)}</span></button></li>`).join('');
   $('.tabbar').innerHTML = NAV.filter(n => n.mobile).map(n =>
-    `<button data-route="${n.id}"><span class="ico">${n.ico}</span>${esc(n.ar)}</button>`).join('');
+    `<button data-route="${n.id}">${iconTile(n.ico)}<span>${esc(n.ar)}</span></button>`).join('');
   $$('[data-route]').forEach(b => b.addEventListener('click', () => go(b.dataset.route)));
   $('#brandName').textContent = S.settings.resthouse_name || 'استراحة أبو سلطان';
   render();
