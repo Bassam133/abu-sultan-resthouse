@@ -251,7 +251,8 @@ function postTransaction({ date, amount, direction, account_kind, source_type, s
   const dup = S.transactions.find(t => !t.voided && t.source_type === source_type && t.source_id === source_id);
   if (dup) return { ok: false, reason: 'هذه الحركة مسجلة مسبقًا — لن تُسجل مرتين' };
   S.transactions.push({
-    id: uid('TRX'), date, amount: halalas(amount), direction, account_kind,
+    /* callers pass integer halalas; store SAR so every entity uses one unit */
+    id: uid('TRX'), date, amount: sar(amount), direction, account_kind,
     source_type, source_id, note: note || '', voided: false, created_at: new Date().toISOString(),
   });
   return { ok: true };
