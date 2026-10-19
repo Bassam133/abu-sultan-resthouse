@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Liquid Glass layer — translucent, layered, Apple-like
+   Needs a colourful ambient backdrop for the refraction to read.
+   ========================================================================== */
+
+:root{
+  --glass-fill: linear-gradient(155deg, rgba(255,255,255,.72), rgba(255,255,255,.26) 55%, rgba(255,255,255,.14));
+  --glass-border: rgba(255,255,255,.78);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(0,0,0,.05);
+  --glass-outer: 0 6px 18px -6px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.06);
+  --ambient-1: rgba(0,122,255,.22);
+  --ambient-2: rgba(88,86,214,.18);
+  --ambient-3: rgba(52,199,89,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --glass-fill: linear-gradient(155deg, rgba(255,255,255,.16), rgba(255,255,255,.07) 55%, rgba(255,255,255,.04));
+    --glass-border: rgba(255,255,255,.22);
+    --glass-inner: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.35);
+    --glass-outer: 0 8px 24px -8px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.35);
+    --ambient-1: rgba(10,132,255,.30);
+    --ambient-2: rgba(94,92,230,.24);
+    --ambient-3: rgba(48,209,88,.16);
+  }
+}
+[data-theme="dark"]{
+  --glass-fill: linear-gradient(155deg, rgba(255,255,255,.16), rgba(255,255,255,.07) 55%, rgba(255,255,255,.04));
+  --glass-border: rgba(255,255,255,.22);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.35);
+  --glass-outer: 0 8px 24px -8px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.35);
+  --ambient-1: rgba(10,132,255,.30);
+  --ambient-2: rgba(94,92,230,.24);
+  --ambient-3: rgba(48,209,88,.16);
+}
+
+/* ambient colour wash so glass has something to refract */
+body::before{
+  content:''; position:fixed; inset:-20%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(38% 32% at 12% 8%, var(--ambient-1), transparent 70%),
+    radial-gradient(42% 38% at 88% 14%, var(--ambient-2), transparent 72%),
+    radial-gradient(46% 40% at 50% 96%, var(--ambient-3), transparent 74%);
+  filter: blur(40px) saturate(130%);
+  opacity:.9;
+}
+
+/* ------------------------------- icon tile -------------------------------- */
+.glass-ico{
+  width:32px;height:32px;flex:none;border-radius:10px;
+  display:inline-grid;place-items:center;
+  background:var(--glass-fill);
+  border:.5px solid var(--glass-border);
+  box-shadow:var(--glass-inner), var(--glass-outer);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  backdrop-filter:blur(20px) saturate(180%);
+  color:var(--primary);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s;
+}
+.glass-ico svg{display:block}
+.nav-list button:hover .glass-ico{transform:translateY(-1px) scale(1.03)}
+.nav-list button[aria-current="page"] .glass-ico{
+  background:linear-gradient(155deg, rgba(0,122,255,.95), rgba(88,86,214,.85));
+  color:#fff;border-color:rgba(255,255,255,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 8px 20px -6px rgba(0,122,255,.65);
+}
+
+/* nav buttons laid out as icon + label */
+.nav-list button{display:flex;align-items:center;gap:10px;width:100%}
+.tabbar button{display:flex;flex-direction:column;align-items:center;gap:4px}
+.tabbar .glass-ico{width:28px;height:28px;border-radius:9px}
+.tabbar button[aria-current="page"] .glass-ico{
+  background:linear-gradient(155deg, rgba(0,122,255,.95), rgba(88,86,214,.85));
+  color:#fff;border-color:rgba(255,255,255,.45);
+}
+.tabbar button[aria-current="page"]{color:var(--primary)}
+
+/* glass cards / surfaces */
+.card{
+  background:var(--glass-fill)!important;
+  border:.5px solid var(--glass-border)!important;
+  box-shadow:var(--glass-inner), var(--glass-outer)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
+  border-radius:20px!important;
+}
+.topbar{
+  background:var(--glass-fill)!important;
+  border-bottom:.5px solid var(--glass-border)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
+}
+.sidebar{
+  background:var(--glass-fill)!important;
+  border-inline-end:.5px solid var(--glass-border)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  backdrop-filter:blur(28px) saturate(180%);
+}
+.stat{
+  background:var(--glass-fill);
+  border:.5px solid var(--glass-border);
+  box-shadow:var(--glass-inner), var(--glass-outer);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-radius:20px;
+}
+
+/* respect reduced transparency */
+@media (prefers-reduced-transparency: reduce){
+  .glass-ico,.card,.topbar,.sidebar,.stat{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--surface)!important}
+}
