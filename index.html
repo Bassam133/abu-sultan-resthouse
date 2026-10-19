@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5F5F7">
+<meta name="description" content="نظام إدارة استراحة أبو سلطان — الحجوزات والإيجارات والمصاريف وحسابات الأعضاء والتقارير المالية.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>استراحة أبو سلطان — نظام الإدارة</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" aria-label="التنقل الرئيسي">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">أ.س</div>
+      <div>
+        <h1 id="brandName">استراحة أبو سلطان</h1>
+        <small>نظام إدارة الاستراحة</small>
+      </div>
+    </div>
+    <ul class="nav-list"></ul>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h2>لوحة التحكم</h2>
+      <button class="btn sec sm" onclick="exportBackup()" title="نسخة احتياطية JSON">⬇ نسخة احتياطية</button>
+      <button class="btn ghost sm" onclick="go('settings')" title="الإعدادات">⚙️</button>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="التنقل السفلي"></nav>
+
+<script src="core.js"></script>
+<script src="ui.js"></script>
+<script src="modules-a.js"></script>
+<script src="modules-b.js"></script>
+</body>
+</html>
