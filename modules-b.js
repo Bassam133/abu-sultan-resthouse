@@ -507,7 +507,7 @@ M2.more = function () {
   return `<div class="card"><h3>أقسام أخرى</h3>
     <div class="btn-row" style="margin:0;flex-direction:column;align-items:stretch">
       ${items.map(n => `<button class="btn sec" style="justify-content:flex-start"
-        onclick="go('${n.id}')"><span style="font-size:17px">${n.ico}</span> ${esc(n.ar)}</button>`).join('')}
+        onclick="go('${n.id}')">${iconTile(n.ico)} <span>${esc(n.ar)}</span></button>`).join('')}
     </div></div>`;
 };
 
