@@ -529,8 +529,8 @@ function seedDemo() {
     { id: p2, date: d(-2), booking_id: S.bookings[1].id, kind: 'rent', amount: 1100, method: 'نقدي', voided: false },
   ];
   S.transactions = [
-    { id: uid('TRX'), date: d(-6), amount: 180000, direction: 'in', account_kind: 'bank', source_type: 'payment', source_id: p1, voided: false },
-    { id: uid('TRX'), date: d(-2), amount: 110000, direction: 'in', account_kind: 'cash', source_type: 'payment', source_id: p2, voided: false },
+    { id: uid('TRX'), date: d(-6), amount: 1800, direction: 'in', account_kind: 'bank', source_type: 'payment', source_id: p1, voided: false },
+    { id: uid('TRX'), date: d(-2), amount: 1100, direction: 'in', account_kind: 'cash', source_type: 'payment', source_id: p2, voided: false },
   ];
   const e1 = uid('EX'), e2 = uid('EX'), e3 = uid('EX');
   S.expenses = [
@@ -543,11 +543,11 @@ function seedDemo() {
       method: 'نقدي', funding_source: 'دفع عضو بالنيابة عن الاستراحة', payer_member_id: 'MEM003',
       kind: 'capital', pay_status: 'مدفوع', voided: false },
   ];
-  S.transactions.push({ id: uid('TRX'), date: d(-5), amount: 42000, direction: 'out', account_kind: 'bank',
+  S.transactions.push({ id: uid('TRX'), date: d(-5), amount: 420, direction: 'out', account_kind: 'bank',
     source_type: 'expense', source_id: e1, voided: false });
   const c1 = uid('CT');
   S.contributions = [{ id: c1, date: d(-10), member_id: 'MEM001', amount: 3000, method: 'تحويل بنكي', account_kind: 'bank', voided: false }];
-  S.transactions.push({ id: uid('TRX'), date: d(-10), amount: 300000, direction: 'in', account_kind: 'bank',
+  S.transactions.push({ id: uid('TRX'), date: d(-10), amount: 3000, direction: 'in', account_kind: 'bank',
     source_type: 'contribution', source_id: c1, voided: false });
   S.employees = [{ id: 'EMP001', name: 'عبدالله (عامل)', phone: '0570001122', job: 'عامل', salary: 1800 }];
   S.payroll = [{ id: uid('PR'), employee_id: 'EMP001', employee_name: 'عبدالله (عامل)',
