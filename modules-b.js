@@ -32,8 +32,8 @@ M2.members = function () {
         ${stat('صافي الرصيد', fmtSAR(Math.abs(net)), net >= 0 ? 'دائن (له)' : 'مدين (عليه)', net >= 0 ? 'pos' : 'neg')}
       </div>
       <div class="btn-row" style="margin-top:0">
-        <button class="btn sm" onclick="addContribution('${mem.id}')">＋ مساهمة</button>
-        <button class="btn sm sec" onclick="addWithdrawal('${mem.id}')">− سحب / ردّ مبلغ</button>
+        <button class="btn sm" onclick="addContribution('${mem.id}')">${uiIcon('plus')} مساهمة</button>
+        <button class="btn sm sec" onclick="addWithdrawal('${mem.id}')">${uiIcon('minus')} سحب / ردّ مبلغ</button>
         <button class="btn sm ghost" onclick="memberStatement('${mem.id}')">كشف حساب</button>
       </div>
     </div>`;
@@ -142,8 +142,8 @@ M2.payroll = function () {
     ${stat('عدد كشوف الرواتب', fmtNum(S.payroll.length), 'سجلات', 'info')}
   </div>
   <div class="btn-row" style="margin-top:16px">
-    <button class="btn" onclick="newEmployee()">＋ عامل جديد</button>
-    <button class="btn sec" onclick="newPayroll()">＋ كشف راتب</button>
+    <button class="btn" onclick="newEmployee()">${uiIcon('plus')} عامل جديد</button>
+    <button class="btn sec" onclick="newPayroll()">${uiIcon('plus')} كشف راتب</button>
   </div>
   <div class="section-head"><h3>العاملون</h3></div>
   ${S.employees.length ? `<div class="table-wrap"><table>
@@ -228,8 +228,8 @@ M2.maintenance = function () {
     ${stat('صيانة مستحقة', fmtNum(due), 'تحتاج مراجعة', due ? 'warn' : 'pos')}
   </div>
   <div class="btn-row" style="margin-top:16px">
-    <button class="btn" onclick="newAsset()">＋ أصل جديد</button>
-    <button class="btn sec" onclick="newMaintenance()">＋ سجل صيانة</button>
+    <button class="btn" onclick="newAsset()">${uiIcon('plus')} أصل جديد</button>
+    <button class="btn sec" onclick="newMaintenance()">${uiIcon('plus')} سجل صيانة</button>
   </div>
   <div class="section-head"><h3>الأصول والأجهزة</h3></div>
   ${S.assets.length ? `<div class="table-wrap"><table>
@@ -320,8 +320,8 @@ M2.reports = function () {
       ${fld('من تاريخ', input('from', `type="date" value="${from}" onchange="uiState.from=this.value;render()"`))}
       ${fld('إلى تاريخ', input('to', `type="date" value="${to}" onchange="uiState.to=this.value;render()"`))}
       <div><label>&nbsp;</label><div class="btn-row" style="margin:0">
-        <button class="btn sec" onclick="window.print()">🖨 طباعة / PDF</button>
-        <button class="btn sec" onclick="exportReportCSV()">⬇ CSV</button></div></div>
+        <button class="btn sec" onclick="window.print()">${uiIcon('print')} طباعة / PDF</button>
+        <button class="btn sec" onclick="exportReportCSV()">${uiIcon('download')} CSV</button></div></div>
     </div>
   </div>
 
@@ -431,9 +431,9 @@ M2.settings = function () {
   <div class="card">
     <h3>النسخ الاحتياطي والبيانات</h3>
     <div class="btn-row" style="margin-top:0">
-      <button class="btn" onclick="exportBackup()">⬇ تصدير نسخة احتياطية</button>
-      <button class="btn sec" onclick="$('#fImport').click()">⬆ استعادة نسخة</button>
-      <button class="btn sec" onclick="exportAllCSV()">⬇ تصدير CSV</button>
+      <button class="btn" onclick="exportBackup()">${uiIcon('download')} تصدير نسخة احتياطية</button>
+      <button class="btn sec" onclick="$('#fImport').click()">${uiIcon('upload')} استعادة نسخة</button>
+      <button class="btn sec" onclick="exportAllCSV()">${uiIcon('download')} تصدير CSV</button>
       ${S.settings.seeded_demo ? `<button class="btn danger" onclick="clearDemo()">حذف البيانات التجريبية</button>` : ''}
       <button class="btn danger" onclick="resetAll()">تفريغ كل البيانات</button>
     </div>
