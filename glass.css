@@ -8,9 +8,9 @@
   --glass-border: rgba(255,255,255,.78);
   --glass-inner: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(0,0,0,.05);
   --glass-outer: 0 6px 18px -6px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.06);
-  --ambient-1: rgba(0,122,255,.22);
-  --ambient-2: rgba(88,86,214,.18);
-  --ambient-3: rgba(52,199,89,.14);
+  --ambient-1: rgba(0,122,255,.10);
+  --ambient-2: rgba(88,86,214,.08);
+  --ambient-3: rgba(52,199,89,.07);
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -18,9 +18,9 @@
     --glass-border: rgba(255,255,255,.22);
     --glass-inner: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.35);
     --glass-outer: 0 8px 24px -8px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.35);
-    --ambient-1: rgba(10,132,255,.30);
-    --ambient-2: rgba(94,92,230,.24);
-    --ambient-3: rgba(48,209,88,.16);
+    --ambient-1: rgba(10,132,255,.12);
+    --ambient-2: rgba(94,92,230,.10);
+    --ambient-3: rgba(48,209,88,.07);
   }
 }
 [data-theme="dark"]{
@@ -28,9 +28,9 @@
   --glass-border: rgba(255,255,255,.22);
   --glass-inner: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.35);
   --glass-outer: 0 8px 24px -8px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.35);
-  --ambient-1: rgba(10,132,255,.30);
-  --ambient-2: rgba(94,92,230,.24);
-  --ambient-3: rgba(48,209,88,.16);
+  --ambient-1: rgba(10,132,255,.12);
+  --ambient-2: rgba(94,92,230,.10);
+  --ambient-3: rgba(48,209,88,.07);
 }
 
 /* ambient colour wash so glass has something to refract */
