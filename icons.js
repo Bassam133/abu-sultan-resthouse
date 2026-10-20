@@ -13,6 +13,13 @@ const ICONS = {
   audit: '<circle cx="12" cy="12" r="7.8"/><path d="M12 7.8V12l3 1.9"/>',
   settings: '<circle cx="12" cy="12" r="3.1"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.9 1.9M16.6 16.6l1.9 1.9M18.5 5.5l-1.9 1.9M7.4 16.6l-1.9 1.9"/>',
   more: '<circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/>',
+  download: '<path d="M12 4.2v9.6"/><path d="M8.4 10.4 12 14l3.6-3.6"/><path d="M5 17.6h14"/>',
+  upload: '<path d="M12 14V4.4"/><path d="M8.4 8 12 4.4 15.6 8"/><path d="M5 17.6h14"/>',
+  print: '<path d="M7 9.4V4.6h10v4.8"/><rect x="4.6" y="9.4" width="14.8" height="6.8" rx="2"/><path d="M7 14.4h10v5H7z"/>',
+  plus: '<path d="M12 5.6v12.8M5.6 12h12.8"/>',
+  minus: '<path d="M5.6 12h12.8"/>',
+  trash: '<path d="M5 7h14"/><path d="M9.6 7V4.8h4.8V7"/><path d="M6.9 7l.8 12.2h8.6L17.1 7"/>',
+  check: '<path d="M5.2 12.6 9.6 17 18.8 7.4"/>',
 };
 
 function svgIcon(name, size) {
@@ -24,4 +31,8 @@ function svgIcon(name, size) {
 /* glass tile wrapper — the translucent "liquid glass" chip behind each icon */
 function iconTile(name, cls) {
   return `<span class="glass-ico ${cls || ''}">${svgIcon(name)}</span>`;
+}
+/* small inline icon for buttons/labels (replaces emoji) */
+function uiIcon(name) {
+  return `<span class="btn-ico" aria-hidden="true">${svgIcon(name, 16)}</span>`;
 }
