@@ -67,7 +67,7 @@ MODULES.dashboard = function () {
     </div>
     <div class="spark" role="list" aria-label="المصاريف — آخر 6 أشهر">${bars.map(b => `
       <div class="col" role="listitem">
-        <i class="out" aria-hidden="true" style="height:${Math.round(b.exp / maxBar * 100)}%" title="${fmtSAR(b.exp * 100)}"></i>
+        <div class="bararea"><i class="out" aria-hidden="true" style="height:${Math.round(b.exp / maxBar * 100)}%" title="${fmtSAR(b.exp * 100)}"></i></div>
         <div class="lb" aria-hidden="true">${monthLabel(b.k).split(' ')[0]}</div>
         <span class="sr-only">${monthLabel(b.k)}: ${fmtSAR(b.exp * 100)}</span>
       </div>`).join('')}
