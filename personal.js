@@ -65,10 +65,11 @@ MODULES.dashboard = function () {
     <div class="section-head" style="margin:0 0 12px">
       <h3 style="margin:0">المصاريف — آخر 6 أشهر</h3>
     </div>
-    <div class="spark">${bars.map(b => `
-      <div class="col">
-        <i class="out" style="height:${Math.round(b.exp / maxBar * 100)}%" title="${fmtSAR(b.exp * 100)}"></i>
-        <div class="lb">${monthLabel(b.k).split(' ')[0]}</div>
+    <div class="spark" role="list" aria-label="المصاريف — آخر 6 أشهر">${bars.map(b => `
+      <div class="col" role="listitem">
+        <i class="out" aria-hidden="true" style="height:${Math.round(b.exp / maxBar * 100)}%" title="${fmtSAR(b.exp * 100)}"></i>
+        <div class="lb" aria-hidden="true">${monthLabel(b.k).split(' ')[0]}</div>
+        <span class="sr-only">${monthLabel(b.k)}: ${fmtSAR(b.exp * 100)}</span>
       </div>`).join('')}
     </div>
     <p class="hint" style="margin-top:10px">الاستراحة للاستخدام الشخصي — المؤشرات كلها على المصروفات والمساهمات.</p>
@@ -127,8 +128,8 @@ MODULES.reports = function () {
       ${fld('من تاريخ', input('from', `type="date" value="${from}" onchange="uiState.from=this.value;render()"`))}
       ${fld('إلى تاريخ', input('to', `type="date" value="${to}" onchange="uiState.to=this.value;render()"`))}
       <div><label>&nbsp;</label><div class="btn-row" style="margin:0">
-        <button class="btn sec" onclick="window.print()">🖨 طباعة / PDF</button>
-        <button class="btn sec" onclick="exportReportCSV()">⬇ CSV</button></div></div>
+        <button class="btn sec" onclick="window.print()">${uiIcon('print')} طباعة / PDF</button>
+        <button class="btn sec" onclick="exportReportCSV()">${uiIcon('download')} CSV</button></div></div>
     </div>
   </div>
 
