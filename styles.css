@@ -338,9 +338,10 @@ html[data-theme="dark"] .banner.ok{color:#a6e9bd}
 
 .bar{height:10px;border-radius:var(--r-pill);background:var(--surface-2);overflow:hidden}
 .bar > i{display:block;height:100%;border-radius:var(--r-pill);background:var(--primary)}
-.spark{display:flex;align-items:flex-end;gap:6px;height:120px}
-.spark .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
-.spark .col i{display:block;border-radius:4px;min-height:2px}
+.spark{display:flex;align-items:stretch;gap:6px;height:120px}
+.spark .col{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
+.spark .bararea{flex:1;min-height:0;display:flex;align-items:flex-end}
+.spark .col i{display:block;width:100%;border-radius:4px;min-height:2px}
 .spark .in{background:var(--success)}
 .spark .out{background:var(--warning)}
 .spark .lb{font-size:11px;color:var(--text-2);text-align:center;margin-top:6px}
