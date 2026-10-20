@@ -135,9 +135,9 @@ M.bookings = function () {
 
   return `
   <div class="btn-row" style="margin:0 0 14px">
-    <button class="btn" onclick="newBooking()">＋ حجز جديد</button>
-    <button class="btn sec" onclick="window.print()">🖨 كشف الحجوزات</button>
-    <button class="btn sec" onclick="exportBookingsCSV()">⬇ CSV</button>
+    <button class="btn" onclick="newBooking()">${uiIcon('plus')} حجز جديد</button>
+    <button class="btn sec" onclick="window.print()">${uiIcon('print')} كشف الحجوزات</button>
+    <button class="btn sec" onclick="exportBookingsCSV()">${uiIcon('download')} CSV</button>
   </div>
   <div class="seg" style="margin-bottom:14px">
     ${['الكل', ...S.settings.booking_statuses].map(s =>
@@ -328,8 +328,8 @@ M.income = function () {
     ${stat('الرصيد البنكي', fmtSAR(accountBalance('bank')), 'الحساب البنكي', 'info')}
   </div>
   <div class="btn-row" style="margin-top:16px">
-    <button class="btn" onclick="quickIncome()">＋ تسجيل مقبوض</button>
-    <button class="btn sec" onclick="exportIncomeCSV()">⬇ CSV</button>
+    <button class="btn" onclick="quickIncome()">${uiIcon('plus')} تسجيل مقبوض</button>
+    <button class="btn sec" onclick="exportIncomeCSV()">${uiIcon('download')} CSV</button>
   </div>
   <div class="section-head"><h3>سجل المقبوضات</h3></div>
   ${pays.length ? `<div class="table-wrap"><table>
@@ -394,9 +394,9 @@ M.expenses = function () {
     ${stat('أكبر تصنيف', top[0] ? top[0][0] : '—', top[0] ? fmtSAR(top[0][1]) : '—', 'info')}
   </div>
   <div class="btn-row" style="margin-top:16px">
-    <button class="btn" onclick="newExpense()">＋ مصروف جديد</button>
-    <button class="btn sec" onclick="exportExpensesCSV()">⬇ CSV</button>
-    <button class="btn sec" onclick="window.print()">🖨 طباعة</button>
+    <button class="btn" onclick="newExpense()">${uiIcon('plus')} مصروف جديد</button>
+    <button class="btn sec" onclick="exportExpensesCSV()">${uiIcon('download')} CSV</button>
+    <button class="btn sec" onclick="window.print()">${uiIcon('print')} طباعة</button>
   </div>
   <div class="seg" style="margin:14px 0;flex-wrap:wrap">
     ${['الكل', ...S.settings.expense_categories].slice(0, 9).map(c =>
