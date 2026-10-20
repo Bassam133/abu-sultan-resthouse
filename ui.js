@@ -41,6 +41,9 @@ function toast(msg) {
   const old = $('.toast'); if (old) old.remove();
   const el = document.createElement('div');
   el.className = 'toast'; el.textContent = msg;
+  el.setAttribute('role', 'status');
+  el.setAttribute('aria-live', 'polite');
+  el.setAttribute('aria-atomic', 'true');
   document.body.appendChild(el);
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.remove(), 2600);
@@ -49,12 +52,14 @@ setToast(toast);
 
 /* --------------------------------- sheet --------------------------------- */
 let sheetSubmit = null;
+let lastFocus = null;
 function openSheet(title, bodyHTML, submitLabel, onSubmit) {
   closeSheet();
+  lastFocus = document.activeElement;
   const back = document.createElement('div');
   back.className = 'sheet-back';
-  back.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">
-      <h3>${esc(title)}</h3>
+  back.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <h3 id="sheetTitle">${esc(title)}</h3>
       <form id="sheetForm">${bodyHTML}
         <div class="actions">
           <button type="submit" class="btn">${esc(submitLabel || 'حفظ')}</button>
@@ -63,6 +68,17 @@ function openSheet(title, bodyHTML, submitLabel, onSubmit) {
       </form></div>`;
   document.body.appendChild(back);
   back.addEventListener('click', e => { if (e.target === back || e.target.hasAttribute('data-close')) closeSheet(); });
+  /* keep keyboard focus inside the dialog (HIG: predictable navigation) */
+  back.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const f = [...back.querySelectorAll(
+      'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'
+    )].filter(el => el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
   sheetSubmit = onSubmit;
   back.querySelector('#sheetForm').addEventListener('submit', e => {
     e.preventDefault();
@@ -73,7 +89,14 @@ function openSheet(title, bodyHTML, submitLabel, onSubmit) {
   const first = back.querySelector('input,select,textarea');
   if (first) setTimeout(() => first.focus(), 60);
 }
-function closeSheet() { const b = $('.sheet-back'); if (b) b.remove(); sheetSubmit = null; }
+function closeSheet() {
+  const b = $('.sheet-back'); if (b) b.remove();
+  sheetSubmit = null;
+  if (lastFocus && typeof lastFocus.focus === 'function' && document.contains(lastFocus)) {
+    try { lastFocus.focus(); } catch (e) {}
+  }
+  lastFocus = null;
+}
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
 
 function confirmDialog(msg, onYes, label) {
