@@ -15,8 +15,14 @@
   --warning:#FF9F0A;
   --danger:#FF3B30;
   --text:#1D1D1F;
-  --text-2:#86868B;
+  --text-2:#5F5F63;            /* AA-compliant on light glass (6.0:1 / 5.3:1) */
   --separator:#D2D2D7;
+  /* text-safe semantic colours — computed for WCAG AA on the light glass stack.
+     The vivid brand colours stay for FILLS (bars, chips); text uses these. */
+  --primary-text:#0057B8;      /* 6.5:1 / 5.8:1 */
+  --success-text:#14702F;      /* 5.9:1 / 5.2:1 */
+  --warning-text:#8A5200;      /* 6.0:1 / 5.3:1 */
+  --danger-text:#B3261E;       /* 6.2:1 / 5.5:1 */
   --glass:rgba(255,255,255,.72);
   --glass-line:rgba(255,255,255,.85);
   --shadow:0 1px 2px rgba(0,0,0,.05), 0 10px 30px rgba(0,0,0,.07);
@@ -46,8 +52,12 @@
     --warning:#FF9F0A;
     --danger:#FF453A;
     --text:#F5F5F7;
-    --text-2:#98989D;
+    --text-2:#AEAEB2;
     --separator:#38383A;
+    --primary-text:#64B5FF;
+    --success-text:#30D158;
+    --warning-text:#FFB340;
+    --danger-text:#FF7A70;
     --glass:rgba(44,44,46,.78);
     --glass-line:rgba(255,255,255,.10);
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.5);
@@ -59,7 +69,8 @@
 html[data-theme="light"]{
   --background:#F5F5F7; --surface:#fff; --surface-2:#F0F0F5; --primary:#007AFF;
   --secondary:#5856D6; --success:#34C759; --warning:#FF9F0A; --danger:#FF3B30;
-  --text:#1D1D1F; --text-2:#86868B; --separator:#D2D2D7;
+  --text:#1D1D1F; --text-2:#5F5F63; --separator:#D2D2D7;
+  --primary-text:#0057B8; --success-text:#14702F; --warning-text:#8A5200; --danger-text:#B3261E;
   --glass:rgba(255,255,255,.72); --glass-line:rgba(255,255,255,.85);
   --nav-bg:rgba(255,255,255,.72);
   --shadow:0 1px 2px rgba(0,0,0,.05), 0 10px 30px rgba(0,0,0,.07);
@@ -67,7 +78,8 @@ html[data-theme="light"]{
 html[data-theme="dark"]{
   --background:#000; --surface:#1C1C1E; --surface-2:#2C2C2E; --primary:#0A84FF;
   --secondary:#5E5CE6; --success:#30D158; --warning:#FF9F0A; --danger:#FF453A;
-  --text:#F5F5F7; --text-2:#98989D; --separator:#38383A;
+  --text:#F5F5F7; --text-2:#AEAEB2; --separator:#38383A;
+  --primary-text:#64B5FF; --success-text:#30D158; --warning-text:#FFB340; --danger-text:#FF7A70;
   --glass:rgba(44,44,46,.78); --glass-line:rgba(255,255,255,.10);
   --nav-bg:rgba(28,28,30,.78);
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.5);
@@ -84,7 +96,7 @@ body{
   -webkit-text-size-adjust:100%;
 }
 num,.num,input[type=number]{font-variant-numeric:tabular-nums}
-a{color:var(--primary);text-decoration:none}
+a{color:var(--primary-text);text-decoration:none}
 
 /* ============================ app shell ================================= */
 .app{display:flex;min-height:100vh;min-height:100dvh}
@@ -194,10 +206,10 @@ a{color:var(--primary);text-decoration:none}
 .stat .k{font-size:13px;font-weight:500;color:var(--text-2);margin-bottom:6px}
 .stat .v{font-size:28px;font-weight:700;letter-spacing:-.8px;font-variant-numeric:tabular-nums}
 .stat .sub{font-size:12px;color:var(--text-2);margin-top:2px}
-.stat .v.pos{color:var(--success)}
-.stat .v.neg{color:var(--danger)}
-.stat .v.warn{color:var(--warning)}
-.stat .v.info{color:var(--primary)}
+.stat .v.pos{color:var(--success-text)}
+.stat .v.neg{color:var(--danger-text)}
+.stat .v.warn{color:var(--warning-text)}
+.stat .v.info{color:var(--primary-text)}
 
 /* buttons */
 .btn{
@@ -220,6 +232,9 @@ a{color:var(--primary);text-decoration:none}
 .btn.ghost{background:transparent;color:var(--primary);box-shadow:none;border:1px solid var(--separator)}
 .btn.danger{background:var(--danger);box-shadow:0 4px 14px rgba(255,59,48,.24)}
 .btn.sm{min-height:36px;padding:0 14px;font-size:13.5px}
+.btn-ico{display:inline-flex;align-items:center;justify-content:center;flex:none}
+.btn-ico svg{display:block}
+.btn.ghost.sm>.btn-ico:only-child{margin:0}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--s2)}
 
 /* forms */
@@ -255,13 +270,20 @@ td.num,th.num{font-variant-numeric:tabular-nums;text-align:end}
   display:inline-block;padding:3px 10px;border-radius:var(--r-pill);
   font-size:12px;font-weight:600;white-space:nowrap;
 }
-.badge.ok{background:rgba(52,199,89,.16);color:#1a7f37}
-.badge.warn{background:rgba(255,159,10,.18);color:#a9660a}
-.badge.danger{background:rgba(255,59,48,.15);color:#c62226}
-.badge.info{background:rgba(0,122,255,.14);color:#0060be}
+.badge.ok{background:rgba(52,199,89,.16);color:var(--success-text)}
+.badge.warn{background:rgba(255,159,10,.18);color:var(--warning-text)}
+.badge.danger{background:rgba(255,59,48,.15);color:var(--danger-text)}
+.badge.info{background:rgba(0,122,255,.14);color:var(--primary-text)}
 .badge.mute{background:var(--surface-2);color:var(--text-2)}
 html[data-theme="dark"] .badge.ok,html[data-theme="dark"] .badge.warn,
 html[data-theme="dark"] .badge.danger,html[data-theme="dark"] .badge.info{color:#fff}
+@media (prefers-color-scheme: dark){
+  .badge.ok,.badge.warn,.badge.danger,.badge.info{color:#fff}
+}
+html[data-theme="light"] .badge.ok{color:var(--success-text)}
+html[data-theme="light"] .badge.warn{color:var(--warning-text)}
+html[data-theme="light"] .badge.danger{color:var(--danger-text)}
+html[data-theme="light"] .badge.info{color:var(--primary-text)}
 
 .seg{display:inline-flex;gap:4px;padding:4px;background:var(--surface-2);border-radius:14px}
 .seg button{
@@ -271,6 +293,9 @@ html[data-theme="dark"] .badge.danger,html[data-theme="dark"] .badge.info{color:
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm)}
 
 .empty{color:var(--text-2);font-size:14px;text-align:center;padding:var(--s4) var(--s2)}
+/* screen-reader-only text (accessible chart values, hidden labels) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 .banner{
   border-radius:16px;padding:14px 16px;font-size:14.5px;
   background:rgba(255,159,10,.16);border:1px solid rgba(255,159,10,.3);color:#7a4400;
@@ -321,6 +346,57 @@ html[data-theme="dark"] .banner.ok{color:#a6e9bd}
 .spark .lb{font-size:11px;color:var(--text-2);text-align:center;margin-top:6px}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ======================= HIG fixes: touch & contrast ==================== */
+/* Touch devices get the 44pt default hit target; mouse/pointer keeps density. */
+@media (pointer: coarse){
+  .btn, .btn.sm{min-height:44px}
+  .seg button{min-height:44px}
+  .badge{font-size:12.5px}
+}
+/* Phone/narrow layout: guarantee the 44pt target regardless of pointer detection
+   (covers tablets and browsers that don't report `pointer: coarse`). */
+@media (max-width: 999px){
+  .btn.sm, .seg button{min-height:44px}
+  .seg{padding:5px}
+  .topbar{padding:8px var(--s2)}
+}
+/* Respect "Increase Contrast": drop translucency, harden lines, deepen text. */
+@media (prefers-contrast: more){
+  .glass-ico,.card,.topbar,.sidebar,.stat,.btn.sec{
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    background:var(--surface)!important;
+  }
+  .card,.table-wrap,.stat,.glass-ico,.btn.ghost,.btn.sec{border-color:#000!important}
+  .sidebar,.topbar,.tabbar{border-color:#000!important}
+  .hint,.stat .k,.stat .sub,.empty,label,th{color:var(--text)}
+  /* light high-contrast tokens (default) */
+  :root{
+    --text-2:#3A3A3C;
+    --success-text:#0B5222; --warning-text:#6B3F00;
+    --danger-text:#8F1B15; --primary-text:#003E85;
+  }
+}
+/* dark high-contrast tokens — via system setting or explicit theme */
+@media (prefers-contrast: more) and (prefers-color-scheme: dark){
+  :root{
+    --text-2:#E5E5EA;
+    --success-text:#5EE289; --warning-text:#FFCC80;
+    --danger-text:#FFA59E; --primary-text:#9ACBFF;
+  }
+}
+@media (prefers-contrast: more){
+  html[data-theme="dark"]{
+    --text-2:#E5E5EA;
+    --success-text:#5EE289; --warning-text:#FFCC80;
+    --danger-text:#FFA59E; --primary-text:#9ACBFF;
+  }
+  html[data-theme="light"]{
+    --text-2:#3A3A3C;
+    --success-text:#0B5222; --warning-text:#6B3F00;
+    --danger-text:#8F1B15; --primary-text:#003E85;
+  }
+}
 @media print{
   .sidebar,.tabbar,.topbar,.btn,.sheet-back,.toast{display:none!important}
   body{background:#fff;color:#000}
